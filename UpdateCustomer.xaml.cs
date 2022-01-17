@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace C969___Scheduling_Software
+{
+    /// <summary>
+    /// Interaction logic for UpdateCustomer.xaml
+    /// </summary>
+    public partial class UpdateCustomer : Window
+    {
+        public UpdateCustomer(Customer customer)
+        {
+            InitializeComponent();
+            mySQLDB mySQLDB = new mySQLDB();
+            List<Address> allAddressList = mySQLDB.SelectAllAddresses();
+            List<string> addressList = new List<string>();
+            foreach (var address in allAddressList)
+            {
+                addressList.Add((String.Format(address.address)) + ", " + (String.Format(address.address2)) + ", " + (mySQLDB.GetCityNameFromCityID(address.cityID)));
+            }
+
+            updateCustAddressComboBox.ItemsSource = addressList;
+            updateCustCustIDTextBox.Text = customer.customerID.ToString();
+            updateCustFullNameTextBox.Text = customer.customerName;
+            updateCustAddressComboBox.SelectedIndex = (customer.customerAddressID) - 1;
+        }
+
+        private void updateCustAddressComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mySQLDB mySQLDB = new mySQLDB();
+            char[] separators = new char[] { ',' };
+            string[] addressData = updateCustAddressComboBox.SelectedItem.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            int cityID = mySQLDB.GetCityIDFromCityName(addressData[2].Trim());
+            if (updateCustAddressIDTextBox.Text == "")
+            {
+                updateCustAddressIDTextBox.Text = mySQLDB.GetAddressIDFromAddress(addressData[0], addressData[1].Trim(), cityID).ToString();
+            }
+            else
+            {
+                updateCustAddressIDTextBox.Text = "";
+                updateCustAddressIDTextBox.Text = mySQLDB.GetAddressIDFromAddress(addressData[0], addressData[1].Trim(), cityID).ToString();
+            }
+        }
+
+        private void newAddressButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddAddress().ShowDialog();
+        }
+
+        private void saveCustButton_Click(object sender, RoutedEventArgs e)
+        {
+            mySQLDB mySQLDB = new mySQLDB();
+            bool proceed = false;
+            try
+            {
+                if (updateCustAddressComboBox.SelectedItem == null || updateCustFullNameTextBox.Text.Length == 0)
+                {
+                    proceed = false;
+                    throw new ApptException();
+                }
+                else
+                {
+                    proceed = true;
+                    mySQLDB.UpdateCustomer(int.Parse(updateCustCustIDTextBox.Text), updateCustFullNameTextBox.Text, int.Parse(updateCustAddressIDTextBox.Text));
+                }
+            }
+            catch (ApptException exception)
+            {
+                exception.CustomerDataException();
+            }
+            if (proceed)
+            {
+                new CustomersPage().Show();
+                this.Close();
+            }
+        }
+    }
+}

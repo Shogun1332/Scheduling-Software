@@ -1,0 +1,79 @@
+﻿<Window x:Class="C969___Scheduling_Software.LogInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:C969___Scheduling_Software"
+        mc:Ignorable="d"
+        Title="Dom's Cool Scheduler - Login" Height="380" Width="380">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Please enter your login information to Sign In."
+               x:Name="infoPromptLabel"
+               Grid.Column="1"
+               Grid.Row="1"
+               Width="330"
+               Height="50"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"/>
+
+        <Label Content="Username"
+               x:Name="usernameLabel"
+               Grid.Column="1"
+               Grid.Row="2"
+               Width="200"
+               Height="50"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" />
+        <TextBox x:Name="usernameTextBox"
+                 Grid.Column="1"
+                 Grid.Row="2"
+                 Width="200"
+                 Height="25"
+                 HorizontalAlignment="Center" />
+        
+        <Label Content="Password"
+               x:Name="passwordLabel"
+               Grid.Column="1"
+               Grid.Row="3"
+               Width="200"
+               Height="50"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" />
+        <PasswordBox x:Name="passwordBox"
+                 Grid.Column="1"
+                 Grid.Row="3"
+                 Width="200"
+                 Height="25"
+                 HorizontalAlignment="Center" />
+
+        <Button x:Name="loginButton"
+                Grid.Column="1"
+                Margin="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Grid.Row="4"
+                Width="100"
+                Height="20"
+                Content="Sign In"
+                Click="LoginButton_Click"/>
+
+    </Grid>
+</Window>

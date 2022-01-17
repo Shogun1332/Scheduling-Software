@@ -1,0 +1,123 @@
+﻿<Window x:Class="C969___Scheduling_Software.CustomersPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:C969___Scheduling_Software"
+        mc:Ignorable="d"
+        Title="CustomersPage" Height="450" Width="800">
+    <Window.Resources>
+        <CollectionViewSource x:Key="CustomerCollectionViewSource"
+                              CollectionViewType="ListCollectionView"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="homeButton"
+                Content="Home"
+                Grid.Column="1"
+                Grid.Row="1"
+                Height="30"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="homeButton_Click"/>
+        <Button x:Name="apptButton"
+                Content="Appointments"
+                Grid.Column="1"
+                Grid.Row="2"
+                Height="30"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="apptButton_Click"/>
+        <Button x:Name="customerButton"
+                Content="Customers"
+                Grid.Column="1"
+                Grid.Row="3"
+                Height="30"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="customerButton_Click"/>
+        <Button x:Name="calendarButton"
+                Content="Calendar"
+                Grid.Column="1"
+                Grid.Row="4"
+                Height="30"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="calendarButton_Click"/>
+        <Button x:Name="reportsButton"
+                Content="Reports"
+                Grid.Column="1"
+                Grid.Row="5"
+                Height="30"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="reportsButton_Click"/>
+        <Label Content="Customers"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               Grid.Row="1"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               FontSize="24"
+               Margin="260,0,0,0"/>
+        <DataGrid x:Name="customerDataGrid"
+                  ItemsSource="{Binding}"
+                  DataContext="{StaticResource CustomerCollectionViewSource}"
+                  AutoGenerateColumns="True"
+                  Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="3"
+                  Grid.RowSpan="4"
+                  Margin="180,0,-60,0"
+                  MaxHeight="500"/>
+        <Button x:Name="customerAddButton"
+                Content="Add"
+                Grid.Column="2"
+                Grid.Row="6"
+                Height="30"
+                Width="75"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="90,0,105,0"
+                Click="customerAddButton_Click"/>
+        <Button x:Name="customerUpdateButton"
+                Content="Update"
+                Grid.Column="2"
+                Grid.Row="6"
+                Height="30"
+                Width="75"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="90,0,15,0"
+                Click="customerUpdateButton_Click"/>
+        <Button x:Name="customerDeleteButton"
+                Content="Delete"
+                Grid.Column="3"
+                Grid.Row="6"
+                Height="30"
+                VerticalAlignment="Center"
+                Margin="0,10,-54,11"
+                Click="customerDeleteButton_Click"/>
+    </Grid>
+</Window>
