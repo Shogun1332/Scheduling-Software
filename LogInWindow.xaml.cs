@@ -111,5 +111,13 @@ namespace C969___Scheduling_Software
             accessLog.WriteLine();
             accessLog.Close();
         }
+
+        private void passwordBox_EnterKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginButton_Click(sender, e);
+            }
+        }
     }
 }

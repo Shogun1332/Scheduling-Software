@@ -62,7 +62,8 @@
                  Grid.Row="3"
                  Width="200"
                  Height="25"
-                 HorizontalAlignment="Center" />
+                 HorizontalAlignment="Center"
+                     KeyDown="passwordBox_EnterKeyDown"/>
 
         <Button x:Name="loginButton"
                 Grid.Column="1"
