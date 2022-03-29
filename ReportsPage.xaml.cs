@@ -131,6 +131,7 @@ namespace C969___Scheduling_Software
             }
         }
 
+
         private void apptTypesByMonthButton_Click(object sender, RoutedEventArgs e)
         {
             noReportLabel.Visibility = Visibility.Hidden;
