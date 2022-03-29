@@ -16,5 +16,11 @@ namespace C969___Scheduling_Software
         public string customerCreatedBy { get; set; }
         public DateTime customerLastModDateTime { get; set; }
         public string customerLastModBy { get; set; }
+        public string address { get; set; }
+        public string address2 { get; set; }
+        public string city { get; set; }
+        public string postal { get; set; }
+        public string country { get; set; }
+        public string phone { get; set; }
     }
 }

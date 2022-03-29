@@ -510,6 +510,57 @@ namespace C969___Scheduling_Software
                 return custList;
             }
         }
+        public List<Customer> SelectAllCustomersAndAddressData()
+        {
+            string query = "SELECT customer.*, address.address, address.address2, address.postalCode, address.phone, city.city, country.country FROM client_schedule.customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId INNER JOIN country ON city.countryId = country.countryId;";
+
+            var custList = new List<Customer>();
+
+            //Open Connection to DB
+            if (this.OpenConnection() == true)
+            {
+                //Create the MySQL Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a MySQL data reader
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data of the query and store in the list
+                while (dataReader.Read())
+                {
+                    custList.Add(new Customer
+                    {
+                        customerID = (int)dataReader["customerId"],
+                        customerName = dataReader["customerName"].ToString(),
+                        customerAddressID = (int)dataReader["addressId"],
+                        customerActive = Convert.ToByte(dataReader["active"]),
+                        customerCreatedDateTime = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
+                        customerCreatedBy = dataReader["createdBy"].ToString(),
+                        customerLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
+                        customerLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        address = dataReader["address"].ToString(),
+                        address2 = dataReader["address2"].ToString(),
+                        postal = dataReader["postalCode"].ToString(),
+                        phone = dataReader["phone"].ToString(),
+                        city = dataReader["city"].ToString(),
+                        country = dataReader["country"].ToString(),
+                    });
+
+                }
+
+                //Close Data Reader
+                dataReader.Close();
+
+                //Close Connection to DB
+                this.CloseConnection();
+
+                //Return List for display
+                return custList;
+            }
+            else
+            {
+                return custList;
+            }
+        }
         public int GetCustomerIDFromCustomerName(string custName)
         {
             string customerName = custName;
@@ -550,7 +601,7 @@ namespace C969___Scheduling_Software
             int customerID = GetMaxCustomerID();
             if (customerID == -1)
             {
-                MessageBox.Show("Exception has occurred. Unable to add Customer, the CustomerID is invalid.", "Dom's Cool Scheduler - Customer Error");
+                MessageBox.Show("Exception has occurred. Unable to add Customer, the CustomerID is invalid.", "Grimoire - Customer Error");
                 return false;
             }
             DateTime current = DateTime.UtcNow;
@@ -660,7 +711,7 @@ namespace C969___Scheduling_Software
             int addressID = GetMaxAddressID();
             if(addressID == -1)
             {
-                MessageBox.Show("Exception has occurred. Unable to add Address, the AddressID is invalid.", "Dom's Cool Scheduler - Address Error");
+                MessageBox.Show("Exception has occurred. Unable to add Address, the AddressID is invalid.", "Grimoire - Address Error");
                 return;
             }
             int cityID = GetCityIDFromCityName(cityName);
@@ -804,7 +855,7 @@ namespace C969___Scheduling_Software
             int cityID = GetMaxCityID();
             if (cityID == -1)
             {
-                MessageBox.Show("Exception has occurred. Unable to add City, the CityID is invalid.", "Dom's Cool Scheduler - City Error");
+                MessageBox.Show("Exception has occurred. Unable to add City, the CityID is invalid.", "Grimoire - City Error");
                 return;
             }
             string cityNameNormalized = (char.ToUpper(cityName[0]) + cityName.Substring(1));
@@ -907,7 +958,7 @@ namespace C969___Scheduling_Software
             int cid = GetMaxCountryID();
             if (cid == -1)
             {
-                MessageBox.Show("Exception has occurred. Unable to add Country, the CountryID is invalid.", "Dom's Cool Scheduler - Country Error");
+                MessageBox.Show("Exception has occurred. Unable to add Country, the CountryID is invalid.", "Grimoire - Country Error");
                 return;
             }
             string countryNormalized = (char.ToUpper(country[0]) + country.Substring(1));

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:C969___Scheduling_Software"
         mc:Ignorable="d"
-        Title="Dom's Cool Scheduler - Login" Height="380" Width="380">
+        Title="Grimoire - Login" Height="380" Width="380">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

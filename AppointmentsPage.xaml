@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:C969___Scheduling_Software"
         mc:Ignorable="d"
-        Title="AppointmentsPage" Height="450" Width="800">
+        Title="Grimoire - Appointments" Height="450" Width="800">
     <Window.Resources>
         <CollectionViewSource x:Key="AppointmentCollectionViewSource"
                               CollectionViewType="ListCollectionView"/>
@@ -15,10 +15,13 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="330"/>
             <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -75,22 +78,23 @@
                 Click="reportsButton_Click"/>
         <Label Content="Your Appointments"
                x:Name="ApptLabel"
-               Grid.Column="1"
-               Grid.ColumnSpan="2"
-               Grid.Row="1"
+               Grid.Column="2"
+               Grid.Row="2"
                HorizontalAlignment="Center"
+               HorizontalContentAlignment="Center"
                VerticalAlignment="Top"
                FontSize="24"
-               Margin="260,0,0,0"/>
+               Margin="24,1,89,0" Width="218"/>
         <DataGrid x:Name="apptDataGrid"
                   ItemsSource="{Binding}"
                   DataContext="{StaticResource AppointmentCollectionViewSource}"
+                  Loaded="apptDataGrid_Loaded"
                   AutoGenerateColumns="True"
-                  Grid.Row="2"
+                  Grid.Row="3"
                   Grid.Column="1"
                   Grid.ColumnSpan="3"
                   Grid.RowSpan="4"
-                  Margin="180,0,-60,0"
+                  Margin="180,1,21,20"
                   MaxHeight="500"/>
         <Button x:Name="apptAddButton"
                 Content="Add"
@@ -100,8 +104,8 @@
                 Width="75"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="90,0,105,0"
-                Click="apptAddButton_Click"/>
+                Margin="0,35,105,35"
+                Click="apptAddButton_Click" RenderTransformOrigin="0.554,0.961" Grid.RowSpan="2"/>
         <Button x:Name="apptUpdateButton"
                 Content="Update"
                 Grid.Column="2"
@@ -110,15 +114,35 @@
                 Width="75"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="90,0,15,0"
-                Click="apptUpdateButton_Click"/>
+                Margin="0,35,15,35"
+                Click="apptUpdateButton_Click" Grid.RowSpan="2"/>
         <Button x:Name="apptDeleteButton"
                 Content="Delete"
-                Grid.Column="3"
+                Grid.Column="2"
                 Grid.Row="6"
                 Height="30"
+                Width="75"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="0,10,-54,11"
-                Click="apptDeleteButton_Click"/>
+                Margin="0,35,7,35"
+                Click="apptDeleteButton_Click" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <TextBox x:Name="SearchBox"
+                 Grid.Column="2"
+                 Grid.Row="1"
+                 Height="30"
+                 Width="200"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Top"
+                 KeyDown="SearchBox_EnterKeyDown"/>
+        <Button x:Name="SearchButton"
+                Content="Search"
+                Grid.Column="3"
+                Grid.Row="1"
+                Height="30"
+                Width="60"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="3,0,0,0"
+                Click="SearchButton_Click"/>
     </Grid>
 </Window>

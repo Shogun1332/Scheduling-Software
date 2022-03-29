@@ -24,11 +24,53 @@ namespace C969___Scheduling_Software
         {
             InitializeComponent();
             mySQLDB mySQLDB = new mySQLDB();
-            List<Customer> customersList = mySQLDB.SelectAllCustomers();
+            List<Customer> customersList = mySQLDB.SelectAllCustomersAndAddressData();
 
             CollectionViewSource CustomerCollectionViewSource;
             CustomerCollectionViewSource = (CollectionViewSource)(FindResource("CustomerCollectionViewSource"));
             CustomerCollectionViewSource.Source = customersList;
+        }
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text.Count() > 0)
+            {
+                mySQLDB mySQLDB = new mySQLDB();
+                List<Customer> customersList = mySQLDB.SelectAllCustomersAndAddressData();
+                List<Customer> filteredCustomersList = new List<Customer>();
+
+                foreach (Customer customer in customersList)
+                {
+                    if (customer.customerName.ToLower().Contains(SearchBox.Text.ToLower()) || customer.address.ToLower().Contains(SearchBox.Text.ToLower()) || customer.address2.ToLower().Contains(SearchBox.Text.ToLower()) || customer.city.ToLower().Contains(SearchBox.Text.ToLower()) || customer.postal.ToLower().Contains(SearchBox.Text.ToLower()) || customer.country.ToLower().Contains(SearchBox.Text.ToLower()) || customer.phone.ToLower().Contains(SearchBox.Text.ToLower()))
+                    {
+                        filteredCustomersList.Add(customer);
+                    }
+                }
+
+                CollectionViewSource CustomerCollectionViewSource;
+                CustomerCollectionViewSource = (CollectionViewSource)(FindResource("CustomerCollectionViewSource"));
+                CustomerCollectionViewSource.Source = filteredCustomersList;
+            }
+            else
+            {
+                mySQLDB mySQLDB = new mySQLDB();
+                List<Customer> customersList = mySQLDB.SelectAllCustomersAndAddressData();
+
+                CollectionViewSource CustomerCollectionViewSource;
+                CustomerCollectionViewSource = (CollectionViewSource)(FindResource("CustomerCollectionViewSource"));
+                CustomerCollectionViewSource.Source = customersList;
+            }
+            customerDataGrid_Loaded(sender, e);
+
+            //Clear Search Textbox for easier followup search
+            SearchBox.Text = "";
+        }
+
+        private void SearchBox_EnterKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchButton_Click(sender, e);
+            }
         }
 
         private void apptButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +117,7 @@ namespace C969___Scheduling_Software
 
         private void customerDeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var warning = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete the selected Customer and any appointments linked to this Customer? This is permanent!", "Dom's Cool Scheduler - Confirm Delete?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            var warning = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete the selected Customer and any appointments linked to this Customer? This is permanent!", "Grimoire - Confirm Delete?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (warning == System.Windows.Forms.DialogResult.OK)
             {
                 mySQLDB mySQLDB = new mySQLDB();
@@ -85,6 +127,27 @@ namespace C969___Scheduling_Software
                 new CustomersPage().Show();
                 this.Close();
             }
+        }
+
+        private void customerDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Hide unnecessary columns from data grid
+            customerDataGrid.Columns[0].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[2].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[3].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[4].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[5].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[6].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[7].Visibility = Visibility.Hidden;
+
+            //Rename remaining columns to have more friendly names
+            customerDataGrid.Columns[1].Header = "Customer Name";
+            customerDataGrid.Columns[8].Header = "Address";
+            customerDataGrid.Columns[9].Header = "Address 2";
+            customerDataGrid.Columns[10].Header = "City";
+            customerDataGrid.Columns[11].Header = "Postal Code";
+            customerDataGrid.Columns[12].Header = "Country";
+            customerDataGrid.Columns[13].Header = "Phone Number";
         }
     }
 }

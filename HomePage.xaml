@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:C969___Scheduling_Software"
         mc:Ignorable="d"
-        Title="Dom's Cool Scheduler - Home Page" Height="450" Width="800">
+        Title="Grimoire - Home" Height="450" Width="800">
     <Window.Resources>
         <CollectionViewSource x:Key="AppointmentCollectionViewSource"
                               CollectionViewType="ListCollectionView"/>
@@ -15,6 +15,7 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="330"/>
             <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -79,21 +80,22 @@
                Grid.Row="1"
                HorizontalAlignment="Center"
                VerticalAlignment="Top"
-               Margin="250,0,0,0"
-               FontSize="24"/>
+               Margin="317,50,67,0"
+               FontSize="24" Grid.RowSpan="2"/>
         <DataGrid x:Name="homeDataGrid"
                   ItemsSource="{Binding}"
                   DataContext="{StaticResource AppointmentCollectionViewSource}"
+                  Loaded="homeDataGrid_Loaded"
                   AutoGenerateColumns="True"
                   CanUserAddRows="False"
-                  Grid.Row="2"
+                  Grid.Row="3"
                   Grid.Column="1"
-                  Grid.ColumnSpan="3"
+                  Grid.ColumnSpan="2"
                   Grid.RowSpan="4"
                   Margin="180,0,-60,0"/>
         <Rectangle x:Name="noAppointmentsRectangle"
                    Grid.Column="1"
-                   Grid.ColumnSpan="3"
+                   Grid.ColumnSpan="2"
                    Grid.Row="2"
                    Grid.RowSpan="4"
                    Margin="180,0,-60,0"
@@ -109,7 +111,24 @@
                Margin="250,0,0,0"
                FontSize="16"
                Visibility="Hidden"/>
+        <TextBox x:Name="SearchBox"
+                 Grid.Column="2"
+                 Grid.Row="1"
+                 Height="30"
+                 Width="200"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Top"
+                 KeyDown="SearchBox_EnterKeyDown"/>
+        <Button x:Name="SearchButton"
+                Content="Search"
+                Grid.Column="3"
+                Grid.Row="1"
+                Height="30"
+                Width="60"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="3,0,0,0"
+                Click="SearchButton_Click"/>
 
-        <!--DataContext="{StaticResource AppointmentCollectionViewSource}"-->
     </Grid>
 </Window>

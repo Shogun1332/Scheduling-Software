@@ -86,7 +86,7 @@ namespace C969___Scheduling_Software
                 loginFail = true;
                 usernameTextBox.Text = String.Empty;
                 passwordBox.Password = String.Empty;
-                System.Windows.Forms.MessageBox.Show(loginError, "Dom's Cool Scheduler - Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(loginError, "Grimoire - Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

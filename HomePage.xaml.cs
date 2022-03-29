@@ -19,10 +19,12 @@ namespace C969___Scheduling_Software
     /// </summary>
     public partial class HomePage : Window
     {
+        private static DateTime _loginTime;
         public HomePage()
         {
             InitializeComponent();
             DateTime loginTime = DateTime.Now;
+            _loginTime = loginTime;
             DateTime reminderTime = loginTime.AddMinutes(15);
 
             mySQLDB mySQLDB = new mySQLDB();
@@ -50,6 +52,27 @@ namespace C969___Scheduling_Software
                 noAppointmentsLabel.Visibility = Visibility.Visible;
                 noAppointmentsRectangle.Visibility = Visibility.Visible;
             }
+        }
+        private void homeDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Hide unnecessary columns from data grid
+            homeDataGrid.Columns[0].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[1].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[2].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[11].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[12].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[13].Visibility = Visibility.Hidden;
+            homeDataGrid.Columns[14].Visibility = Visibility.Hidden;
+
+            //Rename remaining columns to have more friendly names
+            homeDataGrid.Columns[3].Header = "Title";
+            homeDataGrid.Columns[4].Header = "Description";
+            homeDataGrid.Columns[5].Header = "Location";
+            homeDataGrid.Columns[6].Header = "Contact";
+            homeDataGrid.Columns[7].Header = "Type";
+            homeDataGrid.Columns[8].Header = "URL";
+            homeDataGrid.Columns[9].Header = "Start Date & Time";
+            homeDataGrid.Columns[10].Header = "End Date & Time";
         }
 
         private void apptButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +103,83 @@ namespace C969___Scheduling_Software
         {
             new ReportsPage().Show();
             this.Close();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text.Count() > 0)
+            {
+                DateTime reminderTime = _loginTime.AddMinutes(15);
+                mySQLDB mySQLDB = new mySQLDB();
+                List<Appointment> allAppointmentsList = mySQLDB.SelectAllAppointments();
+                List<Appointment> upcomingAppointmentsList = new List<Appointment>();
+                List<Appointment> filteredAppointmentsList = new List<Appointment>();
+                foreach (Appointment appointment in allAppointmentsList)
+                {
+                    appointment.startDateTime = appointment.startDateTime.ToLocalTime();
+                    appointment.endDateTime = appointment.endDateTime.ToLocalTime();
+                    appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
+                    appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                    if (appointment.startDateTime <= reminderTime && appointment.startDateTime >= _loginTime)
+                    {
+                        upcomingAppointmentsList.Add(appointment);
+                    }
+                }
+                foreach (Appointment appointment in upcomingAppointmentsList)
+                {
+                    if (appointment.apptTitle.ToLower().Contains(SearchBox.Text.ToLower()) || appointment.apptDescription.ToLower().Contains(SearchBox.Text.ToLower()) || appointment.apptContact.ToLower().Contains(SearchBox.Text.ToLower()) || mySQLDB.GetCustomerNameFromCustomerID(appointment.apptCustID).ToLower().Contains(SearchBox.Text.ToLower()) || appointment.apptLocation.ToLower().Contains(SearchBox.Text.ToLower()) || appointment.apptType.ToLower().Contains(SearchBox.Text.ToLower()) || appointment.apptURL.ToLower().Contains(SearchBox.Text.ToLower()))
+                    {
+                        filteredAppointmentsList.Add(appointment);
+                    }
+                }
+
+                CollectionViewSource AppointmentCollectionViewSource;
+                AppointmentCollectionViewSource = (CollectionViewSource)(FindResource("AppointmentCollectionViewSource"));
+                AppointmentCollectionViewSource.Source = filteredAppointmentsList;
+
+                if (filteredAppointmentsList.Count == 0)
+                {
+                    homeDataGrid.Visibility = Visibility.Hidden;
+                    noAppointmentsLabel.Content = "No Upcoming Appointments found matching search!";
+                    noAppointmentsLabel.Visibility = Visibility.Visible;
+                    noAppointmentsRectangle.Visibility = Visibility.Visible;
+                }
+                if (filteredAppointmentsList.Count != 0)
+                {
+                    homeDataGrid.Visibility = Visibility.Visible;
+                    noAppointmentsLabel.Visibility = Visibility.Hidden;
+                    noAppointmentsRectangle.Visibility = Visibility.Hidden;
+                }
+                //Hide unnecessary columns from data grid
+                homeDataGrid.Columns[0].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[1].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[2].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[11].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[12].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[13].Visibility = Visibility.Hidden;
+                homeDataGrid.Columns[14].Visibility = Visibility.Hidden;
+
+                //Rename remaining columns to have more friendly names
+                homeDataGrid.Columns[3].Header = "Title";
+                homeDataGrid.Columns[4].Header = "Description";
+                homeDataGrid.Columns[5].Header = "Location";
+                homeDataGrid.Columns[6].Header = "Contact";
+                homeDataGrid.Columns[7].Header = "Type";
+                homeDataGrid.Columns[8].Header = "URL";
+                homeDataGrid.Columns[9].Header = "Start Date & Time";
+                homeDataGrid.Columns[10].Header = "End Date & Time";
+
+                //Clear Search Textbox for easier followup search
+                SearchBox.Text = "";
+            }
+        }
+
+        private void SearchBox_EnterKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchButton_Click(sender, e);
+            }
         }
     }
 }
