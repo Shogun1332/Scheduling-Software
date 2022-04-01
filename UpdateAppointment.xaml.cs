@@ -45,7 +45,7 @@ namespace C969___Scheduling_Software
             int endHour = appt.endDateTime.ToLocalTime().Hour;
             int endMin = appt.endDateTime.ToLocalTime().Minute;
             updateApptCustomerComboBox.SelectedItem = mySQLDB.GetCustomerNameFromCustomerID(appt.apptCustID);
-            mySQLDB.SetAppointmentID(appt.apptID);
+            mySQLDB.SetAppointmentID(appt.Id);
 
             //Populating Start Hour field and AM/PM field
             if (startHour == 0 || startHour == 12)

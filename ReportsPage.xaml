@@ -95,7 +95,7 @@
                 HorizontalAlignment="Right"
                 Margin="0,12,42,8"
                 Click="exportReportButton_Click"
-                Visibility="Visible"/>
+                Visibility="Hidden"/>
         <DataGrid x:Name="reportDataGrid"
                   ItemsSource="{Binding}"
                   DataContext="{DynamicResource ReportsCollectionViewSource}"

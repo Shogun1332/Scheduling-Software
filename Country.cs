@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace C969___Scheduling_Software
 {
-    public class Country
+    public class Country : Base
     {
-        public int countryID { get; set; }
         public string country { get; set; }
-        public DateTime countryCreatedDateTime { get; set; }
-        public string countryCreatedBy { get; set; }
-        public DateTime countryLastModDateTime { get; set; }
-        public string countryLastModBy { get; set; }
+
+        // Used prior to implementing Base to inherit common properties
+        //public int countryID { get; set; }
+        //public DateTime countryCreatedDateTime { get; set; }
+        //public string countryCreatedBy { get; set; }
+        //public DateTime countryLastModDateTime { get; set; }
+        //public string countryLastModBy { get; set; }
     }
 }

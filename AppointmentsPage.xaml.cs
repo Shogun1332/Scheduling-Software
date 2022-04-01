@@ -31,8 +31,8 @@ namespace C969___Scheduling_Software
             {
                 appointment.startDateTime = appointment.startDateTime.ToLocalTime();
                 appointment.endDateTime = appointment.endDateTime.ToLocalTime();
-                appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
-                appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                appointment.Created = appointment.Created.ToLocalTime();
+                appointment.Modified = appointment.Modified.ToLocalTime();
 
                 if (appointment.apptUserID == mySQLDB.GetLoggedInUID())
                 {
@@ -56,8 +56,8 @@ namespace C969___Scheduling_Software
                 {
                     appointment.startDateTime = appointment.startDateTime.ToLocalTime();
                     appointment.endDateTime = appointment.endDateTime.ToLocalTime();
-                    appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
-                    appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                    appointment.Created = appointment.Created.ToLocalTime();
+                    appointment.Modified = appointment.Modified.ToLocalTime();
 
                     if (appointment.apptUserID == mySQLDB.GetLoggedInUID())
                     {
@@ -86,8 +86,8 @@ namespace C969___Scheduling_Software
                 {
                     appointment.startDateTime = appointment.startDateTime.ToLocalTime();
                     appointment.endDateTime = appointment.endDateTime.ToLocalTime();
-                    appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
-                    appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                    appointment.Created = appointment.Created.ToLocalTime();
+                    appointment.Modified = appointment.Modified.ToLocalTime();
 
                     if (appointment.apptUserID == mySQLDB.GetLoggedInUID())
                     {
@@ -102,21 +102,21 @@ namespace C969___Scheduling_Software
             //Hide unnecessary columns from data grid
             apptDataGrid.Columns[0].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[1].Visibility = Visibility.Hidden;
-            apptDataGrid.Columns[2].Visibility = Visibility.Hidden;
+            apptDataGrid.Columns[10].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[11].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[12].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[13].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[14].Visibility = Visibility.Hidden;
 
             //Rename remaining columns to have more friendly names
-            apptDataGrid.Columns[3].Header = "Title";
-            apptDataGrid.Columns[4].Header = "Description";
-            apptDataGrid.Columns[5].Header = "Location";
-            apptDataGrid.Columns[6].Header = "Contact";
-            apptDataGrid.Columns[7].Header = "Type";
-            apptDataGrid.Columns[8].Header = "URL";
-            apptDataGrid.Columns[9].Header = "Start Date & Time";
-            apptDataGrid.Columns[10].Header = "End Date & Time";
+            apptDataGrid.Columns[2].Header = "Title";
+            apptDataGrid.Columns[3].Header = "Description";
+            apptDataGrid.Columns[4].Header = "Location";
+            apptDataGrid.Columns[5].Header = "Contact";
+            apptDataGrid.Columns[6].Header = "Type";
+            apptDataGrid.Columns[7].Header = "URL";
+            apptDataGrid.Columns[8].Header = "Start Date & Time";
+            apptDataGrid.Columns[9].Header = "End Date & Time";
 
             //Clear Search Textbox for easier followup search
             SearchBox.Text = "";
@@ -179,7 +179,7 @@ namespace C969___Scheduling_Software
             {
                 mySQLDB mySQLDB = new mySQLDB();
                 Appointment appt = (Appointment)apptDataGrid.SelectedItem;
-                mySQLDB.DeleteAppointment(appt.apptID);
+                mySQLDB.DeleteAppointment(appt.Id);
                 new AppointmentsPage().Show();
                 this.Close();
             }
@@ -192,21 +192,21 @@ namespace C969___Scheduling_Software
             //Hide unnecessary columns from data grid
             apptDataGrid.Columns[0].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[1].Visibility = Visibility.Hidden;
-            apptDataGrid.Columns[2].Visibility = Visibility.Hidden;
+            apptDataGrid.Columns[10].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[11].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[12].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[13].Visibility = Visibility.Hidden;
             apptDataGrid.Columns[14].Visibility = Visibility.Hidden;
 
             //Rename remaining columns to have more friendly names
-            apptDataGrid.Columns[3].Header = "Title";
-            apptDataGrid.Columns[4].Header = "Description";
-            apptDataGrid.Columns[5].Header = "Location";
-            apptDataGrid.Columns[6].Header = "Contact";
-            apptDataGrid.Columns[7].Header = "Type";
-            apptDataGrid.Columns[8].Header = "URL";
-            apptDataGrid.Columns[9].Header = "Start Date & Time";
-            apptDataGrid.Columns[10].Header = "End Date & Time";
+            apptDataGrid.Columns[2].Header = "Title";
+            apptDataGrid.Columns[3].Header = "Description";
+            apptDataGrid.Columns[4].Header = "Location";
+            apptDataGrid.Columns[5].Header = "Contact";
+            apptDataGrid.Columns[6].Header = "Type";
+            apptDataGrid.Columns[7].Header = "URL";
+            apptDataGrid.Columns[8].Header = "Start Date & Time";
+            apptDataGrid.Columns[9].Header = "End Date & Time";
         }
     }
 }

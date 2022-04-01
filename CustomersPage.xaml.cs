@@ -122,8 +122,8 @@ namespace C969___Scheduling_Software
             {
                 mySQLDB mySQLDB = new mySQLDB();
                 Customer cust = (Customer)customerDataGrid.SelectedItem;
-                mySQLDB.DeleteCustomerAppointments(cust.customerID);
-                mySQLDB.DeleteCustomer(cust.customerID);
+                mySQLDB.DeleteCustomerAppointments(cust.Id);
+                mySQLDB.DeleteCustomer(cust.Id);
                 new CustomersPage().Show();
                 this.Close();
             }
@@ -132,22 +132,23 @@ namespace C969___Scheduling_Software
         private void customerDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             //Hide unnecessary columns from data grid
-            customerDataGrid.Columns[0].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[1].Visibility = Visibility.Hidden;
             customerDataGrid.Columns[2].Visibility = Visibility.Hidden;
-            customerDataGrid.Columns[3].Visibility = Visibility.Hidden;
-            customerDataGrid.Columns[4].Visibility = Visibility.Hidden;
-            customerDataGrid.Columns[5].Visibility = Visibility.Hidden;
-            customerDataGrid.Columns[6].Visibility = Visibility.Hidden;
-            customerDataGrid.Columns[7].Visibility = Visibility.Hidden;
-
+            customerDataGrid.Columns[9].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[10].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[11].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[12].Visibility = Visibility.Hidden;
+            customerDataGrid.Columns[13].Visibility = Visibility.Hidden;
+            //customerDataGrid.Columns[7].Visibility = Visibility.Hidden;
+            
             //Rename remaining columns to have more friendly names
-            customerDataGrid.Columns[1].Header = "Customer Name";
-            customerDataGrid.Columns[8].Header = "Address";
-            customerDataGrid.Columns[9].Header = "Address 2";
-            customerDataGrid.Columns[10].Header = "City";
-            customerDataGrid.Columns[11].Header = "Postal Code";
-            customerDataGrid.Columns[12].Header = "Country";
-            customerDataGrid.Columns[13].Header = "Phone Number";
+            customerDataGrid.Columns[0].Header = "Customer Name";
+            customerDataGrid.Columns[3].Header = "Address";
+            customerDataGrid.Columns[4].Header = "Address 2";
+            customerDataGrid.Columns[5].Header = "City";
+            customerDataGrid.Columns[6].Header = "Postal Code";
+            customerDataGrid.Columns[7].Header = "Country";
+            customerDataGrid.Columns[8].Header = "Phone Number";
         }
     }
 }

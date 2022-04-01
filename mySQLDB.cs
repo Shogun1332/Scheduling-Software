@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace C969___Scheduling_Software
 {
-    class mySQLDB
+    public class mySQLDB
     {
         private MySqlConnection connection;
         private string server;
@@ -246,7 +246,7 @@ namespace C969___Scheduling_Software
                 {
                     list.Add(new Appointment
                     {
-                        apptID = ((int)dataReader["appointmentId"]),
+                        Id = ((int)dataReader["appointmentId"]),
                         apptCustID = ((int)dataReader["customerId"]),
                         apptUserID = ((int)dataReader["userId"]),
                         apptTitle = dataReader["title"].ToString(),
@@ -257,10 +257,10 @@ namespace C969___Scheduling_Software
                         apptURL = dataReader["url"].ToString(),
                         startDateTime = (DateTime)dataReader["start"], //storing all date/time values in UTC for easier time conversion
                         endDateTime = (DateTime)dataReader["end"],
-                        apptCreatedDateTime = (DateTime)dataReader["createDate"],
-                        apptCreatedBy = dataReader["createdBy"].ToString(),
-                        apptLastUpdateDateTime = (DateTime)dataReader["lastUpdate"],
-                        apptLastUpdateBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = (DateTime)dataReader["createDate"],
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = (DateTime)dataReader["lastUpdate"],
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }
@@ -299,7 +299,7 @@ namespace C969___Scheduling_Software
                 {
                     list.Add(new Appointment
                     {
-                        apptID = ((int)dataReader["appointmentId"]),
+                        Id = ((int)dataReader["appointmentId"]),
                         apptCustID = ((int)dataReader["customerId"]),
                         apptUserID = ((int)dataReader["userId"]),
                         apptTitle = dataReader["title"].ToString(),
@@ -310,10 +310,10 @@ namespace C969___Scheduling_Software
                         apptURL = dataReader["url"].ToString(),
                         startDateTime = (DateTime)dataReader["start"], //storing all date/time values in UTC for easier time conversion
                         endDateTime = (DateTime)dataReader["end"],
-                        apptCreatedDateTime = (DateTime)dataReader["createDate"],
-                        apptCreatedBy = dataReader["createdBy"].ToString(),
-                        apptLastUpdateDateTime = (DateTime)dataReader["lastUpdate"],
-                        apptLastUpdateBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = (DateTime)dataReader["createDate"],
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = (DateTime)dataReader["lastUpdate"],
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }
@@ -484,14 +484,14 @@ namespace C969___Scheduling_Software
                 {
                     custList.Add(new Customer
                     {
-                        customerID = (int)dataReader["customerId"],
+                        Id = (int)dataReader["customerId"],
                         customerName = dataReader["customerName"].ToString(),
                         customerAddressID = (int)dataReader["addressId"],
                         customerActive = Convert.ToByte(dataReader["active"]),
-                        customerCreatedDateTime = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
-                        customerCreatedBy = dataReader["createdBy"].ToString(),
-                        customerLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
-                        customerLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }
@@ -529,14 +529,14 @@ namespace C969___Scheduling_Software
                 {
                     custList.Add(new Customer
                     {
-                        customerID = (int)dataReader["customerId"],
+                        Id = (int)dataReader["customerId"],
                         customerName = dataReader["customerName"].ToString(),
                         customerAddressID = (int)dataReader["addressId"],
                         customerActive = Convert.ToByte(dataReader["active"]),
-                        customerCreatedDateTime = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
-                        customerCreatedBy = dataReader["createdBy"].ToString(),
-                        customerLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
-                        customerLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                         address = dataReader["address"].ToString(),
                         address2 = dataReader["address2"].ToString(),
                         postal = dataReader["postalCode"].ToString(),
@@ -572,7 +572,7 @@ namespace C969___Scheduling_Software
             {
                 if (customerName == customer.customerName)
                 {
-                    customerID = customer.customerID;
+                    customerID = customer.Id;
                     return customerID;
                 }
             }
@@ -747,16 +747,16 @@ namespace C969___Scheduling_Software
                 {
                     addressList.Add(new Address
                     {
-                        addressID = (int)dataReader["addressId"],
+                        Id = (int)dataReader["addressId"],
                         address = dataReader["address"].ToString(),
                         address2 = dataReader["address2"].ToString(),
                         cityID = (int)dataReader["cityId"],
                         postalCode = dataReader["postalCode"].ToString(),
                         phone = dataReader["phone"].ToString(),
-                        addressCreatedDateTime = ((DateTime)dataReader["createDate"]).ToLocalTime(),
-                        addressCreatedBy = dataReader["createdBy"].ToString(),
-                        addressLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToLocalTime(),
-                        addressLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = ((DateTime)dataReader["createDate"]).ToLocalTime(),
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = ((DateTime)dataReader["lastUpdate"]).ToLocalTime(),
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }
@@ -890,13 +890,13 @@ namespace C969___Scheduling_Software
                 {
                     cityList.Add(new City
                     {
-                        cityID = (int)dataReader["cityId"],
+                        Id = (int)dataReader["cityId"],
                         city = dataReader["city"].ToString(),
                         countryID = (int)dataReader["countryId"],
-                        cityCreatedDateTime = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
-                        cityCreatedBy = dataReader["createdBy"].ToString(),
-                        cityLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
-                        cityLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }
@@ -992,12 +992,12 @@ namespace C969___Scheduling_Software
                 {
                     countryList.Add(new Country
                     {
-                        countryID = (int)dataReader["countryId"],
+                        Id = (int)dataReader["countryId"],
                         country = dataReader["country"].ToString(),
-                        countryCreatedDateTime = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
-                        countryCreatedBy = dataReader["createdBy"].ToString(),
-                        countryLastModDateTime = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
-                        countryLastModBy = dataReader["lastUpdateBy"].ToString(),
+                        Created = ((DateTime)dataReader["createDate"]).ToUniversalTime(),
+                        CreatedBy = dataReader["createdBy"].ToString(),
+                        Modified = ((DateTime)dataReader["lastUpdate"]).ToUniversalTime(),
+                        ModifiedBy = dataReader["lastUpdateBy"].ToString(),
                     });
 
                 }

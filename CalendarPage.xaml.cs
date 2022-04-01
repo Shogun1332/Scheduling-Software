@@ -31,8 +31,8 @@ namespace C969___Scheduling_Software
             {
                 appt.startDateTime = appt.startDateTime.ToLocalTime();
                 appt.endDateTime = appt.endDateTime.ToLocalTime();
-                appt.apptCreatedDateTime = appt.apptCreatedDateTime.ToLocalTime();
-                appt.apptLastUpdateDateTime = appt.apptLastUpdateDateTime.ToLocalTime();
+                appt.Created = appt.Created.ToLocalTime();
+                appt.Modified = appt.Modified.ToLocalTime();
 
                 calendarApptList.Add(appt);
             }
@@ -54,8 +54,8 @@ namespace C969___Scheduling_Software
                 {
                     appointment.startDateTime = appointment.startDateTime.ToLocalTime();
                     appointment.endDateTime = appointment.endDateTime.ToLocalTime();
-                    appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
-                    appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                    appointment.Created = appointment.Created.ToLocalTime();
+                    appointment.Modified = appointment.Modified.ToLocalTime();
 
                     calendarApptList.Add(appointment);
                 }
@@ -81,8 +81,8 @@ namespace C969___Scheduling_Software
                 {
                     appointment.startDateTime = appointment.startDateTime.ToLocalTime();
                     appointment.endDateTime = appointment.endDateTime.ToLocalTime();
-                    appointment.apptCreatedDateTime = appointment.apptCreatedDateTime.ToLocalTime();
-                    appointment.apptLastUpdateDateTime = appointment.apptLastUpdateDateTime.ToLocalTime();
+                    appointment.Created = appointment.Created.ToLocalTime();
+                    appointment.Modified = appointment.Modified.ToLocalTime();
 
                     calendarApptList.Add(appointment);
                 }
@@ -175,21 +175,21 @@ namespace C969___Scheduling_Software
             //Hide unnecessary columns from data grid
             calDataGrid.Columns[0].Visibility = Visibility.Hidden;
             calDataGrid.Columns[1].Visibility = Visibility.Hidden;
-            calDataGrid.Columns[2].Visibility = Visibility.Hidden;
+            calDataGrid.Columns[10].Visibility = Visibility.Hidden;
             calDataGrid.Columns[11].Visibility = Visibility.Hidden;
             calDataGrid.Columns[12].Visibility = Visibility.Hidden;
             calDataGrid.Columns[13].Visibility = Visibility.Hidden;
             calDataGrid.Columns[14].Visibility = Visibility.Hidden;
 
-            //Rename remaining columns to have more friendly names
-            calDataGrid.Columns[3].Header = "Title";
-            calDataGrid.Columns[4].Header = "Description";
-            calDataGrid.Columns[5].Header = "Location";
-            calDataGrid.Columns[6].Header = "Contact";
-            calDataGrid.Columns[7].Header = "Type";
-            calDataGrid.Columns[8].Header = "URL";
-            calDataGrid.Columns[9].Header = "Start Date & Time";
-            calDataGrid.Columns[10].Header = "End Date & Time";
+            //Rename remining columns to have more friendly names
+            calDataGrid.Columns[2].Header = "Title";
+            calDataGrid.Columns[3].Header = "Description";
+            calDataGrid.Columns[4].Header = "Location";
+            calDataGrid.Columns[5].Header = "Contact";
+            calDataGrid.Columns[6].Header = "Type";
+            calDataGrid.Columns[7].Header = "URL";
+            calDataGrid.Columns[8].Header = "Start Date & Time";
+            calDataGrid.Columns[9].Header = "End Date & Time";
         }
     }
 }

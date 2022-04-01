@@ -31,7 +31,7 @@ namespace C969___Scheduling_Software
             }
 
             updateCustAddressComboBox.ItemsSource = addressList;
-            updateCustCustIDTextBox.Text = customer.customerID.ToString();
+            updateCustCustIDTextBox.Text = customer.Id.ToString();
             updateCustFullNameTextBox.Text = customer.customerName;
             updateCustAddressComboBox.SelectedIndex = (customer.customerAddressID) - 1;
         }

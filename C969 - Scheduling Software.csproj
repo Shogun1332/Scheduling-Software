@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Address.cs" />
     <Compile Include="Appointment.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="City.cs" />
     <Compile Include="ConsultantSchedule.cs" />
     <Compile Include="Country.cs" />
